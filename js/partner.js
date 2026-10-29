@@ -48,7 +48,7 @@
           <button class="btn btn-primary" type="submit">Open dashboard</button>
           <p class="demo-note">Demo mode: pick any property. With Supabase connected, owners sign in with an emailed code and only see their own property.</p>
         </form>
-        <a href="index.html" class="btn-link" style="justify-self:start">← Back to the public site</a></div>`;
+        <a href="./" class="btn-link" style="justify-self:start">← Back to the public site</a></div>`;
   }
 
   /* ---------- shell ---------- */
@@ -56,7 +56,7 @@
   function shell(view, inner) {
     const props = API.partnerProps();
     const slips = bookings().filter(b => b.status === 'slip_review').length;
-    $('#top-right').innerHTML = `<a class="btn btn-ghost btn-sm" href="index.html#stay-${pid}">View public page</a><button class="btn btn-ghost btn-sm" type="button" data-action="logout">Sign out</button>`;
+    $('#top-right').innerHTML = `<a class="btn btn-ghost btn-sm" href="./#stay-${pid}">View public page</a><button class="btn btn-ghost btn-sm" type="button" data-action="logout">Sign out</button>`;
     app.innerHTML = `<div class="dash">
       <aside class="rail">
         ${props.length > 1 ? `<div class="prop-pick"><label class="eyebrow" for="prop-sw">Property</label><select class="input" id="prop-sw">${props.map(p => `<option value="${p.id}" ${p.id === pid ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>` : `<div><span class="eyebrow">Property</span><div style="font-weight:700;margin-top:4px">${esc(P().name)}</div></div>`}
@@ -188,7 +188,7 @@
   function renderProperty() {
     const p = P();
     shell('property', `
-      <div class="work-head"><div><h1>Property page</h1><p class="muted" style="margin-top:4px">What guests read on your listing.</p></div><a class="btn btn-ghost btn-sm" href="index.html#stay-${pid}">Preview</a></div>
+      <div class="work-head"><div><h1>Property page</h1><p class="muted" style="margin-top:4px">What guests read on your listing.</p></div><a class="btn btn-ghost btn-sm" href="./#stay-${pid}">Preview</a></div>
       <form class="panel" id="pp" novalidate><div class="panel-body" style="display:grid;gap:16px">
         <div class="field"><label for="pp-name">Name</label><input class="input" id="pp-name" value="${esc(p.name)}"></div>
         <div class="field"><label for="pp-blurb">Description</label><textarea class="input" id="pp-blurb" rows="5">${esc(p.blurb)}</textarea><span class="muted" style="font-size:.8rem">The first sentence shows on search results.</span><span class="err-msg" data-err="pp"></span></div>

@@ -35,13 +35,13 @@
         <span class="err-msg" id="al-err" role="alert"></span><button class="btn btn-primary" type="submit" id="al-go">Send code</button></form>`
       : `<form id="al" class="step" novalidate><button class="btn btn-primary" type="submit">Enter admin panel</button>
         <p class="demo-note">Demo mode: anyone can enter. With Supabase connected, only accounts marked as admin in the profiles table get in.</p></form>`}
-      <a href="index.html" class="btn-link" style="justify-self:start">← Back to the public site</a></div>`;
+      <a href="./" class="btn-link" style="justify-self:start">← Back to the public site</a></div>`;
   }
 
   const VIEWS = [['overview', 'Overview'], ['approvals', 'Approvals'], ['properties', 'Properties'], ['bookings', 'Bookings'], ['operators', 'Transfer operators'], ['settings', 'Taxes & settings']];
   function shell(view, inner) {
     const pending = API.allProps().filter(p => p.status === 'pending').length;
-    $('#top-right').innerHTML = `<a class="btn btn-ghost btn-sm" href="index.html">Public site</a><button class="btn btn-ghost btn-sm" type="button" data-action="logout">Sign out</button>`;
+    $('#top-right').innerHTML = `<a class="btn btn-ghost btn-sm" href="./">Public site</a><button class="btn btn-ghost btn-sm" type="button" data-action="logout">Sign out</button>`;
     app.innerHTML = `<div class="dash"><aside class="rail">
       <nav aria-label="Admin">${VIEWS.map(([k, l]) => `<a href="#${k}" ${k === view ? 'aria-current="page"' : ''}>${l}${k === 'approvals' && pending ? `<span class="count">${pending}</span>` : ''}</a>`).join('')}</nav>
       <div class="rail-foot muted" style="font-size:.8rem">${API.LIVE ? 'Connected to Supabase' : 'Demo mode · data saved in this browser'}</div>
@@ -97,7 +97,7 @@
             <div class="muted" style="font-size:.86rem">Contact: ${esc(p.contact || '—')}</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px"><button class="btn btn-primary btn-sm" data-action="pstat" data-id="${p.id}" data-value="live">Approve and publish</button><button class="btn btn-ghost btn-sm" data-action="pstat" data-id="${p.id}" data-value="declined">Decline</button></div>
           </div></article>`;
-      }).join('') : `<div class="panel"><div class="rowlist"><div class="none">No properties waiting. New applications from <a href="index.html#list-property">List your property</a> appear here.</div></div></div>`}`);
+      }).join('') : `<div class="panel"><div class="rowlist"><div class="none">No properties waiting. New applications from <a href="./#list-property">List your property</a> appear here.</div></div></div>`}`);
   }
 
   /* ---------- properties ---------- */
@@ -108,7 +108,7 @@
       <div class="panel"><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Property</th><th>Island</th><th>Type</th><th style="text-align:end">Rooms</th><th style="text-align:end">From</th><th style="text-align:end">Rating</th><th>Status</th><th><span class="sr">Actions</span></th></tr></thead><tbody>
       ${list.map(p => { const lo = Math.min(...p.rooms.map(r => r.local)); return `<tr><td><strong>${esc(p.name)}</strong>${p.tourist ? '' : '<div class="muted" style="font-size:.76rem">Residents only</div>'}</td><td class="mono" style="font-size:.84rem">${island(p.island).code} ${esc(island(p.island).name)}</td><td>${D.types[p.type].label}</td><td class="num">${p.roomsTotal}</td><td class="num">${money(lo, true)}</td><td class="num">${p.reviews ? p.rating.toFixed(1) : '—'}</td>
         <td><span class="pill ${PST[p.status][1]}">${PST[p.status][0]}</span></td>
-        <td class="act">${p.status === 'live' ? `<button class="btn btn-ghost btn-sm" data-action="pstat" data-id="${p.id}" data-value="suspended">Suspend</button>` : `<button class="btn btn-ghost btn-sm" data-action="pstat" data-id="${p.id}" data-value="live">Reactivate</button>`}<a class="btn btn-ghost btn-sm" href="index.html#stay-${p.id}">View</a></td></tr>`; }).join('')}
+        <td class="act">${p.status === 'live' ? `<button class="btn btn-ghost btn-sm" data-action="pstat" data-id="${p.id}" data-value="suspended">Suspend</button>` : `<button class="btn btn-ghost btn-sm" data-action="pstat" data-id="${p.id}" data-value="live">Reactivate</button>`}<a class="btn btn-ghost btn-sm" href="./#stay-${p.id}">View</a></td></tr>`; }).join('')}
       </tbody></table></div></div>`);
   }
 
