@@ -73,7 +73,7 @@ p { margin: 0; }
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 .eyebrow { font: 500 .74rem/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- header ---------- */
 .top {
@@ -446,3 +446,31 @@ input[type=range] { width: 100%; accent-color: var(--lagoon); }
 @media (max-width: 760px) { .foot .wrap { grid-template-columns: 1fr 1fr; } .foot .wrap > :first-child { grid-column: 1 / -1; } }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* ---------- additions: availability, statuses, partner band ---------- */
+.left { font: 600 .72rem var(--f-mono); color: var(--warn); margin-inline-start: 6px; white-space: nowrap; }
+.left.none { color: var(--err); }
+.status.wait { color: var(--warn); }
+.status.done { color: var(--muted); }
+.btn-danger { background: var(--err); color: #fff; }
+.owner-band {
+  display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px;
+  background: var(--lagoon-soft); border-radius: var(--r-m); padding: 28px;
+}
+.lang-btn { font-family: "Noto Sans Thaana", var(--f-body); }
+
+/* ---------- Dhivehi (Thaana, right to left) ---------- */
+html[lang="dv"] body { font-family: "Noto Sans Thaana", var(--f-body); }
+html[lang="dv"] h1, html[lang="dv"] h2, html[lang="dv"] h3, html[lang="dv"] h4,
+html[lang="dv"] .brand-name { font-family: "Noto Sans Thaana", var(--f-display); letter-spacing: 0; }
+html[lang="dv"] .eyebrow { letter-spacing: 0; text-transform: none; font-family: "Noto Sans Thaana", var(--f-mono); }
+html[lang="dv"] h1 { line-height: 1.45; }
+html[lang="dv"] h2, html[lang="dv"] h3 { line-height: 1.5; }
+[dir="rtl"] .faq summary { padding: 14px 0 14px 32px; }
+[dir="rtl"] .faq summary::after { right: auto; left: 4px; }
+[dir="rtl"] .card .side { border-left: 0; border-right: 1px dashed var(--line); text-align: left; }
+[dir="rtl"] .board-row { text-align: right; }
+[dir="rtl"] .board-row .go { text-align: left; }
+[dir="rtl"] .stamp { right: auto; left: 14px; }
+[dir="rtl"] .ledger .v, [dir="rtl"] .mono { direction: ltr; unicode-bidi: isolate; }
+@media (max-width: 760px) { [dir="rtl"] .card .side { border-right: 0; } }
